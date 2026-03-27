@@ -18,22 +18,22 @@ Examples:
 
 People can also be stored, but the company workflow is the main focus.
 
-## Intended interface
+## Interfaces
 
-This repo is being built around two local interfaces:
+This repo exposes two local interfaces:
 - REST API for CRUD and lookup
 - MCP tools for agent-driven CRUD and lookup
 
-Planned MCP tools:
+MCP tools:
 - `lookupEntry`
 - `listEntries`
 - `createEntry`
 - `updateEntry`
 - `deleteEntry`
 
-## Planned record shape
+## Record shape
 
-Each blacklist entry is intended to support:
+Each blacklist entry supports:
 - generated ID
 - type: `company` or `person`
 - name
@@ -50,3 +50,42 @@ Each blacklist entry is intended to support:
 ## Goal
 
 Keep a simple personal sanctions database that an agent can consult before surfacing a company again.
+
+## Local setup
+
+```bash
+npm install
+npm run typecheck
+npm test
+```
+
+## Run locally
+
+REST server:
+
+```bash
+npm run dev:rest
+```
+
+MCP server:
+
+```bash
+npm run dev:mcp
+```
+
+Defaults:
+- REST listens on `http://localhost:3000`
+- SQLite database path is `./data/blacklist.sqlite`
+
+Optional environment variables:
+- `PORT`
+- `BLACKLIST_DB_PATH`
+
+## REST routes
+
+- `POST /entries`
+- `GET /entries`
+- `GET /entries/:id`
+- `PATCH /entries/:id`
+- `DELETE /entries/:id`
+- `GET /lookup?name=...`
